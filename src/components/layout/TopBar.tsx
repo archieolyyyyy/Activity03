@@ -31,7 +31,7 @@ function MetaChip({
 
 export function TopBar() {
   return (
-    <header className="sticky top-0 z-[9999] bg-terminal/90 backdrop-blur-xl border-b border-threat/40 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+    <header className="sticky top-0 z-[9999] chrome-panel border-b border-threat/40 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
       <div className="h-0.5 bg-gradient-to-r from-transparent via-threat/80 to-transparent" />
 
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-2.5 sm:py-3">

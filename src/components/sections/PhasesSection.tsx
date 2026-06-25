@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { PHASES } from '../../data/caseData';
 import { Phase1Physical } from '../phases/Phase1Physical';
 import { Phase2Terminal } from '../phases/Phase2Terminal';
@@ -25,18 +24,14 @@ const phaseContent: Record<string, React.ComponentType<{ phase: (typeof PHASES)[
 
 export function PhasesSection() {
   return (
-    <section className="px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12 max-w-6xl mx-auto">
+    <section className="scroll-section px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12 max-w-6xl mx-auto">
       {PHASES.map((phase) => {
         const Content = phaseContent[phase.id];
         return (
-          <motion.article
+          <article
             key={phase.id}
             id={phase.id}
-            initial={{ opacity: 1, y: 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.6 }}
-            className={`relative glass-panel overflow-hidden border-t-4 ${borderMap[phase.border] ?? 'border-t-threat'}`}
+            className={`relative glass-panel overflow-visible border-t-4 ${borderMap[phase.border] ?? 'border-t-threat'}`}
           >
             <span className="absolute top-4 right-6 text-6xl font-heading font-bold text-white/[0.03] pointer-events-none">
               {phase.num}
@@ -54,7 +49,7 @@ export function PhasesSection() {
                 <Content phase={phase} />
               </ErrorBoundary>
             </div>
-          </motion.article>
+          </article>
         );
       })}
     </section>

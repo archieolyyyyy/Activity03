@@ -39,7 +39,7 @@ export function HeroSection() {
   }, [reduced]);
 
   return (
-    <section id="overview" className="relative py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto text-center">
+    <section id="overview" className="scroll-section relative py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto text-center">
       <ClassificationBanner
         items={['CLASSIFIED', 'CASE FILE #02', 'THREAT LEVEL: HIGH', 'USIU EYES ONLY']}
       />
@@ -77,9 +77,8 @@ export function HeroSection() {
             <motion.div
               key={z.name}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 + i * 0.08 }}
               className="glass-panel p-5 border-threat/30 hover:border-threat/60 transition-colors duration-200"
             >
               <Icon className="w-8 h-8 text-threat mx-auto mb-2" strokeWidth={1.5} />

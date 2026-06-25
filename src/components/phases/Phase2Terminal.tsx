@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
 import { TERMINAL_LOG } from '../../data/caseData';
 import { FieldNote } from '../ui/Primitives';
 import type { PHASES } from '../../data/caseData';
@@ -85,14 +84,12 @@ export function Phase2Terminal({ phase }: { phase: Phase }) {
             <p className="text-slate-600">// Connection log will auto-play on scroll, or click Replay_</p>
           )}
           {lines.map((entry) => (
-            <motion.div
+            <div
               key={`${entry.time}-${entry.text}`}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              className={entry.highlight ? 'text-threat font-bold' : ''}
+              className={`opacity-0 animate-[fadeInLeft_0.25s_ease_forwards] ${entry.highlight ? 'text-threat font-bold' : ''}`}
             >
               <span className="text-slate-600">[{entry.time}]</span> {entry.text}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -51,7 +51,7 @@ function Column({
   const complete = getColumnComplete(col);
 
   return (
-    <div className="glass-panel overflow-hidden">
+    <div className="glass-panel overflow-visible">
       <div
         className={`p-5 text-center font-heading font-bold uppercase tracking-widest transition-colors duration-300 ${
           complete ? 'bg-safe/15 text-safe' : 'bg-threat/15 text-threat'
@@ -93,7 +93,7 @@ function Column({
 
 export function ImprovementSection() {
   return (
-    <section id="improvementSection" className="py-10 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+    <section id="improvementSection" className="scroll-section py-10 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
       <div className="section-label mb-2">Remediation</div>
       <h2 className="font-heading text-2xl sm:text-3xl font-bold uppercase mb-6 sm:mb-8">Security Improvement Plan</h2>
       <ScoreDisplay />

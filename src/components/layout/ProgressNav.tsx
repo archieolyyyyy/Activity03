@@ -41,7 +41,7 @@ export function ProgressNav() {
   return (
     <>
       <nav
-        className="hidden xl:flex fixed left-4 top-1/2 -translate-y-1/2 z-[9990] flex-col gap-1 p-2 glass-panel"
+        className="hidden xl:flex fixed left-4 top-1/2 -translate-y-1/2 z-[9990] flex-col gap-1 p-2 chrome-panel rounded-lg"
         aria-label="Investigation progress"
       >
         {NAV_SECTIONS.map(({ id, label }) => (
@@ -50,7 +50,7 @@ export function ProgressNav() {
       </nav>
 
       <nav
-        className="xl:hidden fixed bottom-0 inset-x-0 z-[9990] glass-panel border-t border-cyan/20 pb-[env(safe-area-inset-bottom)]"
+        className="xl:hidden fixed bottom-0 inset-x-0 z-[9990] chrome-panel border-t border-cyan/20 pb-[env(safe-area-inset-bottom)]"
         aria-label="Investigation progress mobile"
       >
         <div className="px-2 pt-2 pb-2 forensic-scroll overflow-x-auto">

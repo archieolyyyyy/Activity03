@@ -9,7 +9,7 @@ const priorityClass = {
 
 export function RecommendationsSection() {
   return (
-    <section id="recommendationsSection" className="py-10 sm:py-16 px-4 sm:px-6 max-w-4xl mx-auto">
+    <section id="recommendationsSection" className="scroll-section py-10 sm:py-16 px-4 sm:px-6 max-w-4xl mx-auto">
       <div className="section-label mb-2">Strategic Recommendations</div>
       <h2 className="font-heading text-2xl sm:text-3xl font-bold uppercase mb-8 sm:mb-10">Recommendations</h2>
       <div className="space-y-5">
@@ -20,7 +20,7 @@ export function RecommendationsSection() {
               key={rec.id}
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '0px 0px -80px 0px' }}
               transition={{ delay: i * 0.06 }}
               className="relative glass-panel p-5 sm:p-8 sm:hover:translate-x-1 transition-transform duration-200"
             >

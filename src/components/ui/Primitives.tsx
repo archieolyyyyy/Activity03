@@ -1,20 +1,18 @@
-import { motion } from 'framer-motion';
-
 export function AmbientLayer() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
+    <div className="ambient-layer fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
       <div
-        className="absolute -inset-1/2 opacity-40 animate-[gridDrift_40s_linear_infinite]"
+        className="absolute -inset-1/2 opacity-25 motion-safe:animate-[gridDrift_60s_linear_infinite]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(6,182,212,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.04) 1px, transparent 1px)',
+            'linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px)',
           backgroundSize: '48px 48px',
-          transform: 'perspective(500px) rotateX(60deg)',
+          transform: 'perspective(500px) rotateX(60deg) translateZ(0)',
+          willChange: 'transform',
         }}
       />
-      <div className="absolute -top-48 -left-24 w-[600px] h-[600px] rounded-full bg-threat/10 blur-[120px] animate-pulse" />
-      <div className="absolute -bottom-48 -right-24 w-[600px] h-[600px] rounded-full bg-info/10 blur-[120px] animate-pulse" style={{ animationDelay: '10s' }} />
-      <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan/20 to-transparent animate-[scan_8s_linear_infinite]" />
+      <div className="absolute -top-48 -left-24 w-[480px] h-[480px] rounded-full bg-threat/8 blur-3xl" />
+      <div className="absolute -bottom-48 -right-24 w-[480px] h-[480px] rounded-full bg-info/8 blur-3xl" />
     </div>
   );
 }
@@ -38,15 +36,12 @@ export function GlassPanel({ children, className = '' }: { children: React.React
 
 export function FieldNote({ label, text, index }: { label: string; text: string; index: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -12 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ delay: index * 0.05, duration: 0.3 }}
-      className="mb-4 p-4 bg-black/30 border-l-[3px] border-warning rounded-r"
+    <div
+      className="mb-4 p-4 bg-black/30 border-l-[3px] border-warning rounded-r opacity-0 animate-[fadeInLeft_0.35s_ease_forwards]"
+      style={{ animationDelay: `${index * 50}ms` }}
     >
       <div className="text-[11px] text-warning uppercase tracking-wider font-bold mb-2">{label}</div>
       <p className="text-sm text-slate-300 leading-relaxed">{text.replace(/^\[FINDING \d+\] /, '')}</p>
-    </motion.div>
+    </div>
   );
 }

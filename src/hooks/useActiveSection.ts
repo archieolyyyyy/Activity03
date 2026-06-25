@@ -7,6 +7,7 @@ export function useActiveSection() {
   const [active, setActive] = useState<NavSection>(SECTION_IDS[0]);
   const activeRef = useRef(active);
   const ratiosRef = useRef(new Map<string, number>());
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     activeRef.current = active;
@@ -22,10 +23,18 @@ export function useActiveSection() {
           bestId = id as NavSection;
         }
       });
-      if (bestId && bestRatio > 0 && bestId !== activeRef.current) {
+      if (bestId && bestRatio > 0.08 && bestId !== activeRef.current) {
         activeRef.current = bestId;
         setActive(bestId);
       }
+    };
+
+    const schedulePick = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        pickBest();
+      });
     };
 
     const observer = new IntersectionObserver(
@@ -33,9 +42,9 @@ export function useActiveSection() {
         entries.forEach((entry) => {
           ratiosRef.current.set(entry.target.id, entry.intersectionRatio);
         });
-        pickBest();
+        schedulePick();
       },
-      { threshold: [0, 0.15, 0.3, 0.5, 0.75], rootMargin: '-12% 0px -55% 0px' },
+      { threshold: [0, 0.25, 0.5, 0.75], rootMargin: '-10% 0px -52% 0px' },
     );
 
     SECTION_IDS.forEach((id) => {
@@ -43,12 +52,17 @@ export function useActiveSection() {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return active;
 }
 
 export function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

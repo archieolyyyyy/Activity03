@@ -16,17 +16,39 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   body {
     @apply bg-terminal text-slate-200 font-mono antialiased;
     line-height: 1.7;
+    overflow-x: clip;
+    overscroll-behavior-y: none;
+  }
+  [id] {
+    scroll-margin-top: 5.5rem;
+    scroll-margin-bottom: 5.5rem;
+  }
+  @media (min-width: 1280px) {
+    [id] {
+      scroll-margin-bottom: 1.5rem;
+    }
   }
 }
 
 @layer utilities {
   .glass-panel {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-lg;
+    @apply bg-[#10141a]/92 border border-white/[0.08] rounded-lg;
+    contain: layout style;
+  }
+  .chrome-panel {
+    @apply bg-[#0a0a0c]/94 border border-white/[0.08];
+    contain: layout style paint;
+  }
+  .scroll-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
   }
   .classification-stamp {
     @apply font-heading font-bold uppercase tracking-[0.25em] text-threat/20 border-4 border-threat/30 px-5 py-2 rotate-[-12deg];
@@ -43,17 +65,28 @@
     @apply pointer-events-none fixed inset-0 z-[9998];
     background: repeating-linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.1) 0px,
-      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.06) 0px,
+      rgba(0, 0, 0, 0.06) 2px,
       transparent 2px,
       transparent 4px
     );
+    will-change: opacity;
+    transform: translateZ(0);
   }
   .film-grain::before {
     content: "";
-    @apply pointer-events-none fixed inset-0 z-[9997] opacity-[0.03];
+    @apply pointer-events-none fixed inset-0 z-[9997] opacity-[0.02];
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 128px 128px;
+    will-change: opacity;
+    transform: translateZ(0);
+  }
+  html.is-scrolling .scanlines::after,
+  html.is-scrolling .film-grain::before {
+    opacity: 0;
+  }
+  html.is-scrolling .ambient-layer [class*="animate-"] {
+    animation-play-state: paused;
   }
   .forensic-scroll {
     scrollbar-width: none;
@@ -64,6 +97,10 @@
   }
 }
 
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 @keyframes gridDrift {
   0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
   100% { transform: perspective(500px) rotateX(60deg) translateY(48px); }
@@ -78,10 +115,6 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-@keyframes dash {
-  to { stroke-dashoffset: -18; }
-}
-
 @keyframes dash {
   to { stroke-dashoffset: -18; }
 }

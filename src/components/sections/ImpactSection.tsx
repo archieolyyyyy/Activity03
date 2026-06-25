@@ -10,7 +10,7 @@ const badgeClass = {
 
 export function ImpactSection() {
   return (
-    <section id="impactSection" className="py-10 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+    <section id="impactSection" className="scroll-section py-10 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
       <div className="section-label mb-2">Impact Assessment</div>
       <h2 className="font-heading text-2xl sm:text-3xl font-bold uppercase mb-8 sm:mb-10">Impact Analysis</h2>
       <div className="grid md:grid-cols-2 gap-5">
@@ -19,9 +19,9 @@ export function ImpactSection() {
           return (
             <motion.div
               key={card.name}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '0px 0px -80px 0px' }}
               transition={{ delay: i * 0.08 }}
               className={`glass-panel p-6 border-l-4 ${
                 card.tone === 'critical' ? 'border-l-threat' : 'border-l-warning'

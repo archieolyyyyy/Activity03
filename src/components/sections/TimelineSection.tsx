@@ -48,7 +48,7 @@ export function TimelineSection() {
   };
 
   return (
-    <section id="timelineSection" className="py-10 sm:py-16 px-4 sm:px-6">
+    <section id="timelineSection" className="scroll-section py-10 sm:py-16 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto mb-6 sm:mb-8">
         <div className="section-label">Incident Reconstruction</div>
         <h2 className="font-heading text-2xl sm:text-3xl font-bold uppercase">Incident Timeline</h2>

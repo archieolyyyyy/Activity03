@@ -51,9 +51,9 @@ export function EvidenceBoard() {
   return (
     <section
       id="evidenceBoard"
-      className="relative mx-3 sm:mx-6 my-8 sm:my-12 min-h-[60vh] sm:min-h-[72vh] rounded-lg overflow-hidden evidence-frame evidence-cork"
+      className="scroll-section relative mx-3 sm:mx-6 my-8 sm:my-12 min-h-[60vh] sm:min-h-[72vh] rounded-lg overflow-visible evidence-frame evidence-cork"
     >
-      <div ref={boardRef} className="relative p-6 sm:p-10 min-h-[60vh] sm:min-h-[72vh]">
+      <div ref={boardRef} className="relative p-6 sm:p-10 pb-12 sm:pb-14 min-h-[60vh] sm:min-h-[72vh]">
         {/* case stamp */}
         <div className="absolute top-6 right-6 sm:top-8 sm:right-10 z-[4] hidden sm:block rotate-[-8deg] border-2 border-[#5c4033]/50 px-3 py-1.5 rounded-sm bg-[#f5e6c8]/80">
           <div className="font-mono text-[9px] text-[#5c4033] uppercase tracking-[0.25em] font-bold">
@@ -96,17 +96,9 @@ export function EvidenceBoard() {
                 type="button"
                 onClick={() => scrollToSection(card.id)}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.45 }}
-                whileHover={{
-                  y: -10,
-                  scale: 1.04,
-                  rotate: 0,
-                  boxShadow: '6px 14px 32px rgba(0,0,0,0.42), 0 0 24px rgba(220,38,38,0.12)',
-                }}
-                whileTap={{ scale: 0.98, y: -4 }}
-                className="evidence-paper group relative text-left sm:text-center p-5 sm:p-6 pt-9 rounded-sm cursor-pointer min-h-[200px] flex flex-col items-center border border-[#d4c4a0]/80 hover:border-[#b8956a]/90 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-threat/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#8b6f47]"
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.08, duration: 0.45 }}
+                className="evidence-paper group relative text-left sm:text-center p-5 sm:p-6 pt-9 rounded-sm cursor-pointer min-h-[200px] flex flex-col items-center border border-[#d4c4a0]/80 hover:border-[#b8956a]/90 hover:-translate-y-2 hover:scale-[1.02] hover:rotate-0 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-threat/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#8b6f47]"
                 style={{ rotate: `${ROTATIONS[i]}deg` }}
               >
                 <Pushpin />

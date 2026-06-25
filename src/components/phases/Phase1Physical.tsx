@@ -25,7 +25,7 @@ export function Phase1Physical({ phase }: { phase: Phase }) {
 
   return (
     <>
-      <div className="glass-panel p-5 overflow-hidden">
+      <div className="glass-panel p-5 overflow-visible">
         <h4 className="flex items-center gap-2 text-warning text-sm uppercase tracking-wider mb-4 font-heading border-b border-warning/20 pb-3">
           <Building2 className="w-4 h-4" /> Building Floorplan — Click Rooms
         </h4>
